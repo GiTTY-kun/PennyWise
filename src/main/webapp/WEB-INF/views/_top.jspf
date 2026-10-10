@@ -1,0 +1,26 @@
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><c:out value="${sysName}"/> - <c:out value="${me.role.label}"/></title>
+<link rel="stylesheet" href="${ctx}/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><c:out value="${sysName}"/></div>
+  <div>
+    <span class="tag"><c:out value="${me.role.label}"/></span> <c:out value="${me.name}"/>
+    <form class="inline" method="post" action="${ctx}/logout"><button class="g">Sign out</button></form>
+  </div>
+</header>
+<div class="wrap">
+<nav>
+  <c:forEach var="m" items="${menu}">
+    <a href="${ctx}/${basePath}?tab=${m.key}" class="${m.key == tab ? 'on' : ''}"><c:out value="${m.value}"/></a>
+  </c:forEach>
+</nav>
+<main>
+<c:if test="${not empty msg}"><div class="card ok-box" role="status"><c:out value="${msg}"/></div></c:if>
+<c:if test="${not empty err}"><div class="card err-box" role="alert"><c:out value="${err}"/></div></c:if>
